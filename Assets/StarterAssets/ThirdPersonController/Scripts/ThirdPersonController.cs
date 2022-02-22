@@ -58,6 +58,9 @@ namespace StarterAssets
 		public float CameraAngleOverride = 0.0f;
 		[Tooltip("For locking the camera position on all axis")]
 		public bool LockCameraPosition = false;
+		[Header("Particle System")]
+		[Tooltip("para que el jugador haga sistema de particulas al moverse")]
+		public ParticleSystem humoExtraño;
 
 		// cinemachine
 		private float _cinemachineTargetYaw;
@@ -253,6 +256,8 @@ namespace StarterAssets
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
+					humoExtraño.Stop();
+
 					// update animator if using character
 					if (_hasAnimator)
 					{
@@ -265,6 +270,7 @@ namespace StarterAssets
 				{
 					_jumpTimeoutDelta -= Time.deltaTime;
 				}
+				humoExtraño.Play();
 			}
 			else
 			{
